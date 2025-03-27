@@ -14,21 +14,21 @@ import {
 import { fetchPolicies } from "../api"
 
 
-const PolicyTable = ({ }) => {
+const PolicyTable = ({filters }) => {
     const [policies, setPolicies] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
     useEffect(() => {
         setLoading(true)
-        fetchPolicies({})
+        fetchPolicies(filters ? filters : {})
             .then((data) => {
                 console.log("DATAAAAA", data)
                 setPolicies(data)
             })
             .catch((err) => setError( err.message))
             .finally(() => setLoading(false))
-    }, [])
+    }, [filters])
 
 
     const renderTable = () => {
